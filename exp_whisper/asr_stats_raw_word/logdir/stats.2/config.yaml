@@ -1,0 +1,225 @@
+config: conf/gop/train_whisper_feats_gop.yaml
+print_config: false
+log_level: INFO
+dry_run: false
+iterator_type: sequence
+output_dir: exp_whisper/asr_stats_raw_word/logdir/stats.2
+ngpu: 0
+seed: 0
+num_workers: 1
+num_att_plot: 0
+dist_backend: nccl
+dist_init_method: env://
+dist_world_size: null
+dist_rank: null
+local_rank: null
+dist_master_addr: null
+dist_master_port: null
+dist_launcher: null
+multiprocessing_distributed: false
+unused_parameters: false
+sharded_ddp: false
+cudnn_enabled: true
+cudnn_benchmark: false
+cudnn_deterministic: true
+collect_stats: true
+write_collected_feats: false
+max_epoch: 80
+patience: null
+val_scheduler_criterion:
+- valid
+- total_loss
+early_stopping_criterion:
+- valid
+- loss
+- min
+best_model_criterion:
+-   - valid
+    - total_loss
+    - min
+keep_nbest_models: 1
+nbest_averaging_interval: 0
+grad_clip: 5.0
+grad_clip_type: 2.0
+grad_noise: false
+accum_grad: 1
+no_forward_run: false
+resume: false
+train_dtype: float32
+use_amp: false
+log_interval: null
+use_matplotlib: true
+use_tensorboard: true
+create_graph_in_tensorboard: false
+use_wandb: false
+wandb_project: null
+wandb_id: null
+wandb_entity: null
+wandb_name: null
+wandb_model_log_interval: -1
+detect_anomaly: false
+pretrain_path: null
+init_param: []
+ignore_init_mismatch: false
+freeze_param:
+- frontend.upstream
+num_iters_per_epoch: null
+batch_size: 32
+valid_batch_size: null
+batch_bins: 1000000
+valid_batch_bins: null
+train_shape_file:
+- exp_whisper/asr_stats_raw_word/logdir/train.2.scp
+valid_shape_file:
+- exp_whisper/asr_stats_raw_word/logdir/valid.2.scp
+batch_type: folded
+valid_batch_type: null
+fold_length: []
+sort_in_batch: descending
+sort_batch: descending
+multiple_iterator: false
+chunk_length: 500
+chunk_shift_ratio: 0.5
+num_cache_chunks: 1024
+train_data_path_and_name_and_type:
+-   - dump/raw/speechocean_train/wav.scp
+    - speech
+    - sound
+-   - dump/raw/speechocean_train/text
+    - text
+    - text
+-   - dump/raw/speechocean_train/utt2score
+    - phone_score
+    - text_float
+-   - dump/raw/speechocean_train/utt2_new_word_score
+    - word_score
+    - text_float
+-   - dump/raw/speechocean_train/utt2_new_utt_score
+    - utt_score
+    - text_float
+valid_data_path_and_name_and_type:
+-   - dump/raw/speechocean_test/wav.scp
+    - speech
+    - sound
+-   - dump/raw/speechocean_test/text
+    - text
+    - text
+-   - dump/raw/speechocean_test/utt2score
+    - phone_score
+    - text_float
+-   - dump/raw/speechocean_test/utt2_new_word_score
+    - word_score
+    - text_float
+-   - dump/raw/speechocean_test/utt2_new_utt_score
+    - utt_score
+    - text_float
+allow_variable_data_keys: true
+max_cache_size: 0.0
+max_cache_fd: 32
+valid_max_cache_size: null
+optim: adam
+optim_conf:
+    lr: 0.025
+    weight_decay: 1.0e-06
+scheduler: warmuplr
+scheduler_conf:
+    warmup_steps: 40000
+utt2align: dump/raw/speechocean_train/text_id_align_all
+word_len_align: dump/raw/speechocean_train/text_word_align_all
+token_list:
+- <eps>
+- SIL
+- SPN
+- AA
+- AE
+- AH
+- AO
+- AW
+- AY
+- B
+- CH
+- D
+- DH
+- EH
+- ER
+- EY
+- F
+- G
+- HH
+- IH
+- IY
+- JH
+- K
+- L
+- M
+- N
+- NG
+- OW
+- OY
+- P
+- R
+- S
+- SH
+- T
+- TH
+- UH
+- UW
+- V
+- W
+- Y
+- Z
+- ZH
+init: null
+input_size: 1
+ctc_conf:
+    dropout_rate: 0.0
+    ctc_type: builtin
+    reduce: true
+    ignore_nan_grad: null
+    zero_infinity: true
+joint_net_conf: null
+use_preprocessor: true
+token_type: word
+bpemodel: null
+non_linguistic_symbols: null
+cleaner: null
+g2p: null
+speech_volume_normalize: null
+rir_scp: null
+rir_apply_prob: 1.0
+noise_scp: null
+noise_apply_prob: 1.0
+noise_db_range: '13_15'
+short_noise_thres: 0.5
+frontend: null
+frontend_conf: {}
+specaug: null
+specaug_conf: {}
+normalize: utterance_mvn
+normalize_conf: {}
+model: espnet
+model_conf:
+    report_cer: false
+    report_wer: false
+preencoder: null
+preencoder_conf: {}
+encoder: transformer
+encoder_conf:
+    output_size: 256
+    attention_heads: 4
+    linear_units: 512
+    num_blocks: 3
+    dropout_rate: 0.1
+    positional_dropout_rate: 0.1
+    attention_dropout_rate: 0.0
+    input_layer: null
+    normalize_before: true
+postencoder: null
+postencoder_conf: {}
+decoder: rnn
+decoder_conf: {}
+required:
+- output_dir
+- token_list
+version: '202209'
+distributed: false

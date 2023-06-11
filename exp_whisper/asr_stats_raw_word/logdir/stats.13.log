@@ -1,0 +1,108 @@
+# python3 -m espnet2.bin.gop_multitask_train --collect_stats true --use_preprocessor true --bpemodel none --token_type word --token_list data/token_list/word/tokens.txt --non_linguistic_symbols none --cleaner none --g2p none --train_data_path_and_name_and_type dump/raw/speechocean_train/wav.scp,speech,sound --train_data_path_and_name_and_type dump/raw/speechocean_train/text,text,text --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2score,phone_score,text_float --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2_new_word_score,word_score,text_float --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2_new_utt_score,utt_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/wav.scp,speech,sound --valid_data_path_and_name_and_type dump/raw/speechocean_test/text,text,text --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2score,phone_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2_new_word_score,word_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2_new_utt_score,utt_score,text_float --train_shape_file exp_whisper/asr_stats_raw_word/logdir/train.13.scp --valid_shape_file exp_whisper/asr_stats_raw_word/logdir/valid.13.scp --utt2align dump/raw/speechocean_train/text_id_align_all --word_len_align dump/raw/speechocean_train/text_word_align_all --allow_variable_data_keys true --output_dir exp_whisper/asr_stats_raw_word/logdir/stats.13 --config conf/gop/train_whisper_feats_gop.yaml --frontend_conf fs=16k 
+# Invoked at Fri May 12 22:41:00 +08 2023 from node04
+#
+# Started at Fri May 12 22:41:00 +08 2023 on node08
+/home3/lirui001/w2022/github/espnet/tools/anaconda/envs/espnet/bin/python3 /home3/lirui001/w2022/github/espnet/espnet2/bin/gop_multitask_train.py --collect_stats true --use_preprocessor true --bpemodel none --token_type word --token_list data/token_list/word/tokens.txt --non_linguistic_symbols none --cleaner none --g2p none --train_data_path_and_name_and_type dump/raw/speechocean_train/wav.scp,speech,sound --train_data_path_and_name_and_type dump/raw/speechocean_train/text,text,text --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2score,phone_score,text_float --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2_new_word_score,word_score,text_float --train_data_path_and_name_and_type dump/raw/speechocean_train/utt2_new_utt_score,utt_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/wav.scp,speech,sound --valid_data_path_and_name_and_type dump/raw/speechocean_test/text,text,text --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2score,phone_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2_new_word_score,word_score,text_float --valid_data_path_and_name_and_type dump/raw/speechocean_test/utt2_new_utt_score,utt_score,text_float --train_shape_file exp_whisper/asr_stats_raw_word/logdir/train.13.scp --valid_shape_file exp_whisper/asr_stats_raw_word/logdir/valid.13.scp --utt2align dump/raw/speechocean_train/text_id_align_all --word_len_align dump/raw/speechocean_train/text_word_align_all --allow_variable_data_keys true --output_dir exp_whisper/asr_stats_raw_word/logdir/stats.13 --config conf/gop/train_whisper_feats_gop.yaml --frontend_conf fs=16k
+[node08] 2023-05-12 22:41:07,111 (gop_multitask:428) INFO: Vocabulary size: 42
+[node08] 2023-05-12 22:41:08,009 (abs_task:1157) INFO: pytorch.version=1.10.1, cuda.available=True, cudnn.version=8200, cudnn.benchmark=False, cudnn.deterministic=True
+[node08] 2023-05-12 22:41:08,010 (abs_task:1158) INFO: Model structure:
+ESPnetGOPModel(
+  (normalize): UtteranceMVN(norm_means=True, norm_vars=False)
+  (encoder): TransformerEncoder(
+    (embed): Linear(in_features=1, out_features=256, bias=True)
+    (encoders): MultiSequential(
+      (0): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linear_q): Linear(in_features=256, out_features=256, bias=True)
+          (linear_k): Linear(in_features=256, out_features=256, bias=True)
+          (linear_v): Linear(in_features=256, out_features=256, bias=True)
+          (linear_out): Linear(in_features=256, out_features=256, bias=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=256, out_features=512, bias=True)
+          (w_2): Linear(in_features=512, out_features=256, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (activation): ReLU()
+        )
+        (norm1): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (1): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linear_q): Linear(in_features=256, out_features=256, bias=True)
+          (linear_k): Linear(in_features=256, out_features=256, bias=True)
+          (linear_v): Linear(in_features=256, out_features=256, bias=True)
+          (linear_out): Linear(in_features=256, out_features=256, bias=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=256, out_features=512, bias=True)
+          (w_2): Linear(in_features=512, out_features=256, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (activation): ReLU()
+        )
+        (norm1): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (2): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linear_q): Linear(in_features=256, out_features=256, bias=True)
+          (linear_k): Linear(in_features=256, out_features=256, bias=True)
+          (linear_v): Linear(in_features=256, out_features=256, bias=True)
+          (linear_out): Linear(in_features=256, out_features=256, bias=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=256, out_features=512, bias=True)
+          (w_2): Linear(in_features=512, out_features=256, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (activation): ReLU()
+        )
+        (norm1): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+    )
+    (after_norm): LayerNorm((256,), eps=1e-12, elementwise_affine=True)
+  )
+  (phone_to_word): MLP(
+    (fc1): Linear(in_features=256, out_features=256, bias=True)
+    (relu): ReLU()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (fc2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (word_to_utt): MLP(
+    (fc1): Linear(in_features=256, out_features=256, bias=True)
+    (relu): ReLU()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (fc2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (mlp_phone_score): Linear(in_features=256, out_features=1, bias=True)
+  (mlp_word_score): Linear(in_features=256, out_features=1, bias=True)
+  (mlp_utt_score): Linear(in_features=512, out_features=1, bias=True)
+  (mseloss): MSELoss()
+)
+
+Model summary:
+    Class Name: ESPnetGOPModel
+    Total Number of model parameters: 1.85 M
+    Number of trainable parameters: 1.85 M (100.0%)
+    Size: 7.39 MB
+    Type: torch.float32
+[node08] 2023-05-12 22:41:08,010 (abs_task:1161) INFO: Optimizer:
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.025
+    lr: 6.249999999999999e-07
+    weight_decay: 1e-06
+)
+[node08] 2023-05-12 22:41:08,010 (abs_task:1162) INFO: Scheduler: WarmupLR(warmup_steps=40000)
+[node08] 2023-05-12 22:41:08,095 (abs_task:1171) INFO: Saving the configuration in exp_whisper/asr_stats_raw_word/logdir/stats.13/config.yaml
+[node08] 2023-05-12 22:41:08,117 (abs_task:1182) INFO: Namespace(accum_grad=1, allow_variable_data_keys=True, batch_bins=1000000, batch_size=32, batch_type='folded', best_model_criterion=[['valid', 'total_loss', 'min']], bpemodel=None, chunk_length=500, chunk_shift_ratio=0.5, cleaner=None, collect_stats=True, config='conf/gop/train_whisper_feats_gop.yaml', create_graph_in_tensorboard=False, ctc_conf={'dropout_rate': 0.0, 'ctc_type': 'builtin', 'reduce': True, 'ignore_nan_grad': None, 'zero_infinity': True}, cudnn_benchmark=False, cudnn_deterministic=True, cudnn_enabled=True, decoder='rnn', decoder_conf={}, detect_anomaly=False, dist_backend='nccl', dist_init_method='env://', dist_launcher=None, dist_master_addr=None, dist_master_port=None, dist_rank=None, dist_world_size=None, distributed=False, dry_run=False, early_stopping_criterion=('valid', 'loss', 'min'), encoder='transformer', encoder_conf={'output_size': 256, 'attention_heads': 4, 'linear_units': 512, 'num_blocks': 3, 'dropout_rate': 0.1, 'positional_dropout_rate': 0.1, 'attention_dropout_rate': 0.0, 'input_layer': None, 'normalize_before': True}, fold_length=[], freeze_param=['frontend.upstream'], frontend=None, frontend_conf={}, g2p=None, grad_clip=5.0, grad_clip_type=2.0, grad_noise=False, ignore_init_mismatch=False, init=None, init_param=[], input_size=1, iterator_type='sequence', joint_net_conf=None, keep_nbest_models=1, local_rank=None, log_interval=None, log_level='INFO', max_cache_fd=32, max_cache_size=0.0, max_epoch=80, model='espnet', model_conf={'report_cer': False, 'report_wer': False}, multiple_iterator=False, multiprocessing_distributed=False, nbest_averaging_interval=0, ngpu=0, no_forward_run=False, noise_apply_prob=1.0, noise_db_range='13_15', noise_scp=None, non_linguistic_symbols=None, normalize='utterance_mvn', normalize_conf={}, num_att_plot=0, num_cache_chunks=1024, num_iters_per_epoch=None, num_workers=1, optim='adam', optim_conf={'lr': 0.025, 'weight_decay': 1e-06}, output_dir='exp_whisper/asr_stats_raw_word/logdir/stats.13', patience=None, postencoder=None, postencoder_conf={}, preencoder=None, preencoder_conf={}, pretrain_path=None, print_config=False, required=['output_dir', 'token_list'], resume=False, rir_apply_prob=1.0, rir_scp=None, scheduler='warmuplr', scheduler_conf={'warmup_steps': 40000}, seed=0, sharded_ddp=False, short_noise_thres=0.5, sort_batch='descending', sort_in_batch='descending', specaug=None, specaug_conf={}, speech_volume_normalize=None, token_list=['<eps>', 'SIL', 'SPN', 'AA', 'AE', 'AH', 'AO', 'AW', 'AY', 'B', 'CH', 'D', 'DH', 'EH', 'ER', 'EY', 'F', 'G', 'HH', 'IH', 'IY', 'JH', 'K', 'L', 'M', 'N', 'NG', 'OW', 'OY', 'P', 'R', 'S', 'SH', 'T', 'TH', 'UH', 'UW', 'V', 'W', 'Y', 'Z', 'ZH'], token_type='word', train_data_path_and_name_and_type=[('dump/raw/speechocean_train/wav.scp', 'speech', 'sound'), ('dump/raw/speechocean_train/text', 'text', 'text'), ('dump/raw/speechocean_train/utt2score', 'phone_score', 'text_float'), ('dump/raw/speechocean_train/utt2_new_word_score', 'word_score', 'text_float'), ('dump/raw/speechocean_train/utt2_new_utt_score', 'utt_score', 'text_float')], train_dtype='float32', train_shape_file=['exp_whisper/asr_stats_raw_word/logdir/train.13.scp'], unused_parameters=False, use_amp=False, use_matplotlib=True, use_preprocessor=True, use_tensorboard=True, use_wandb=False, utt2align='dump/raw/speechocean_train/text_id_align_all', val_scheduler_criterion=['valid', 'total_loss'], valid_batch_bins=None, valid_batch_size=None, valid_batch_type=None, valid_data_path_and_name_and_type=[('dump/raw/speechocean_test/wav.scp', 'speech', 'sound'), ('dump/raw/speechocean_test/text', 'text', 'text'), ('dump/raw/speechocean_test/utt2score', 'phone_score', 'text_float'), ('dump/raw/speechocean_test/utt2_new_word_score', 'word_score', 'text_float'), ('dump/raw/speechocean_test/utt2_new_utt_score', 'utt_score', 'text_float')], valid_max_cache_size=None, valid_shape_file=['exp_whisper/asr_stats_raw_word/logdir/valid.13.scp'], version='202209', wandb_entity=None, wandb_id=None, wandb_model_log_interval=-1, wandb_name=None, wandb_project=None, word_len_align='dump/raw/speechocean_train/text_word_align_all', write_collected_feats=False)
+# Ended (code 0) at Fri May 12 22:41:12 +08 2023, elapsed time 12 seconds
